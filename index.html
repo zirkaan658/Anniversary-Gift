@@ -426,122 +426,124 @@ button, .modal, .card-inner, .heart-box {
  background: rgba(245, 120, 120, 0.719);
 }
 
-/* Controls */
-.controls {
-  max-width: 900px;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
+* {
+  box-sizing: border-box;
 }
 
-.category {
-  border: 1px solid #eee;
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #e84354;
+  overflow-x: hidden; /* 🔥 prevents side scroll */
+}
+
+.paint-app {
+  max-width: 500px;   /* 🔥 keeps it centered */
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   padding: 15px;
-  border-radius: 12px;
-  min-width: 220px;
 }
 
-.category h3 {
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-}
-
-.options button {
-  padding: 6px 10px;
-  border: none;
-  background: #f2f2f2;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.2s ease;
-  font-size: 13px;
-}
-
-.options button.active {
-  background: #eb143c;
+.title {
+  text-align: center;
   color: white;
+  margin-bottom: 15px;
 }
 
-.options button:hover {
-  transform: scale(1.05);
-}
-.paint-container {
+.app-wrapper {
+  flex: 1;
   display: flex;
-  gap: 20px;
-  max-width: 1200px;
-  margin: auto;
+  flex-direction: column; /* 🔥 MOBILE FIRST */
+  gap: 15px;
 }
 
-.sidebar {
-  width: 220px;
-  background: #f8f8f8;
+/* Toolbar */
+.toolbar {
+  background: #f1f1f1;
+  border-radius: 15px;
   padding: 15px;
-  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.sidebar h4 {
-  margin: 15px 0 8px;
-  font-size: 14px;
-}
-
-.tool-grid {
+.tools {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(4, 1fr); /* 4 tools in one row */
+  gap: 10px;
 }
 
 .tool {
-  padding: 8px;
-  font-size: 18px;
+  height: 45px;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background: white;
+  border-radius: 12px;
+  background: #ddd;
+  font-size: 18px;
 }
 
 .tool.active {
-  background: #e41f43;
+  background: #e84354;
   color: white;
 }
 
-.actions {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+input[type="range"] {
+  width: 100%;
 }
 
-.canvas-wrapper {
+input[type="color"] {
+  width: 60px;
+  height: 35px;
+  border: none;
+  padding: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.actions button {
   flex: 1;
-  background: #ddd;
-  border-radius: 12px;
   padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #e84354;
+  color: white;
+}
+
+/* Canvas */
+.canvas-container {
+  flex: 1;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 canvas {
-  background: white;
   width: 100%;
-  height: 600px;
+  height: 100%;
   display: block;
-  border-radius: 8px;
-  cursor: crosshair;
 }
 
-/* Mobile */
-@media(max-width: 900px) {
-  .paint-container {
-    flex-direction: column;
+/* 🔥 DESKTOP UPGRADE */
+@media (min-width: 768px) {
+
+  .paint-app {
+    max-width: 1100px;
   }
-  .sidebar {
-    width: 100%;
+
+  .app-wrapper {
+    flex-direction: row;
+  }
+
+  .toolbar {
+    width: 260px;
+  }
+
+  .canvas-container {
+    flex: 1;
   }
 }
 
@@ -747,54 +749,39 @@ canvas {
 
   <button class="back-btn">Back</button>
 </section>
+<section class="paint-app">
+  <h2 class="title">Draw Me Something 🎨</h2>
 
+  <div class="app-wrapper">
 
-<section id="drawSomething" class="paint-section">
-  <h2>Draw Me Something 🎨</h2>
+    <!-- Toolbar -->
+    <div class="toolbar">
 
-  <div class="paint-container">
-
-    <!-- LEFT TOOL PANEL -->
-    <div class="sidebar">
-
-      <h4>Tools</h4>
-      <div class="tool-grid">
+      <div class="tools">
         <button class="tool active" data-tool="brush">🖌</button>
         <button class="tool" data-tool="eraser">🧽</button>
-        <button class="tool" data-tool="fill">🪣</button>
-        <button class="tool" data-tool="text">🔤</button>
+       
+        
       </div>
 
-      <h4>Shapes</h4>
-      <div class="tool-grid">
-        <button class="tool" data-tool="line">📏</button>
-        <button class="tool" data-tool="rect">▭</button>
-        <button class="tool" data-tool="circle">⚪</button>
-      </div>
-
-      <h4>Brush Size</h4>
       <input type="range" id="brushSize" min="1" max="40" value="5">
-
-      <h4>Colors</h4>
-      <input type="color" id="colorPicker" value="#ff4d6d">
+      <input type="color" id="colorPicker" value="#000000">
 
       <div class="actions">
-        <button id="undoBtn">Undo</button>
-        <button id="redoBtn">Redo</button>
         <button id="clearBtn">Clear</button>
-        <button id="downloadBtn">Download</button>
+        <button id="downloadBtn">Save</button>
       </div>
 
     </div>
 
-    <!-- CANVAS AREA -->
-    <div class="canvas-wrapper">
+    <!-- Canvas -->
+    <div class="canvas-container">
       <canvas id="paintCanvas"></canvas>
     </div>
 
   </div>
-    <button class="back-btn">Back</button>
 </section>
+
 
 <script>
 // ===== Elements =====
@@ -1040,9 +1027,9 @@ cardsArray.forEach(symbol=>{
     const firstSymbol = firstCard.querySelector('.card-back').innerText;
     const secondSymbol = secondCard.querySelector('.card-back').innerText;
 setTimeout(() => {
-    if(firstSymbol === secondSymbol || (firstSymbol==='X' && secondSymbol==='Y') || (firstSymbol==='Y' && secondSymbol==='X')) {
-        // Special pair logic (X & Y) handled here
-        if((firstSymbol==='X' && secondSymbol==='Y') || (firstSymbol==='Y' && secondSymbol==='X')) {
+    if(firstSymbol === secondSymbol || (firstSymbol==='H' && secondSymbol==='Z') || (firstSymbol==='Z' && secondSymbol==='H')) {
+        // Special pair logic (H & Z) handled here
+        if((firstSymbol==='H' && secondSymbol==='Z') || (firstSymbol==='Z' && secondSymbol==='H')) {
             showPopup("💖 Yayyy !🌷 You've found the perfect pair!💌 We are made for each other! 💖", 5000);
         }
         // If normal matching pair, keep them flipped (do nothing)
@@ -1342,209 +1329,93 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-const controlsContainer = document.getElementById("controls");
-
-function createControls() {
-  Object.keys(outfitData).forEach(category => {
-
-    const categoryDiv = document.createElement("div");
-    categoryDiv.classList.add("category");
-
-    const title = document.createElement("h3");
-    title.textContent = category.toUpperCase();
-    categoryDiv.appendChild(title);
-
-    const optionsDiv = document.createElement("div");
-    optionsDiv.classList.add("options");
-
-    outfitData[category].forEach((imgSrc, index) => {
-      const button = document.createElement("button");
-      button.textContent = `Option ${index + 1}`;
-
-      button.addEventListener("click", () => {
-        selectItem(category, imgSrc, button);
-      });
-
-      optionsDiv.appendChild(button);
-    });
-
-    categoryDiv.appendChild(optionsDiv);
-    controlsContainer.appendChild(categoryDiv);
-  });
-}
-
-function selectItem(category, imgSrc, button) {
-  const layer = document.getElementById(`layer-${category}`);
-  layer.src = imgSrc;
-
-  // Remove active from siblings
-  const buttons = button.parentElement.querySelectorAll("button");
-  buttons.forEach(btn => btn.classList.remove("active"));
-
-  button.classList.add("active");
-}
-
-createControls();
 const canvas = document.getElementById("paintCanvas");
 const ctx = canvas.getContext("2d");
 
+let drawing = false;
+let currentTool = "brush";
+let brushSize = 5;
+let color = "#000000";
+
 function resizeCanvas() {
   canvas.width = canvas.offsetWidth;
-  canvas.height = 600;
-  ctx.fillStyle = "#ffffff";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  canvas.height = canvas.offsetHeight;
 }
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
-let currentTool = "brush";
-let drawing = false;
-let startX, startY;
-let brushSize = 5;
-let brushColor = "#ff4d6d";
-let snapshot;
-
-let undoStack = [];
-let redoStack = [];
-
-function saveState() {
-  undoStack.push(canvas.toDataURL());
-  redoStack = [];
-}
-
-function undo() {
-  if (!undoStack.length) return;
-  redoStack.push(canvas.toDataURL());
-  const img = new Image();
-  img.src = undoStack.pop();
-  img.onload = () => ctx.drawImage(img, 0, 0);
-}
-
-function redo() {
-  if (!redoStack.length) return;
-  undoStack.push(canvas.toDataURL());
-  const img = new Image();
-  img.src = redoStack.pop();
-  img.onload = () => ctx.drawImage(img, 0, 0);
-}
-
 document.querySelectorAll(".tool").forEach(btn => {
-  btn.onclick = () => {
+  btn.addEventListener("click", () => {
     document.querySelectorAll(".tool").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     currentTool = btn.dataset.tool;
-  };
+  });
 });
 
-document.getElementById("brushSize").oninput = e => brushSize = e.target.value;
-document.getElementById("colorPicker").oninput = e => brushColor = e.target.value;
+document.getElementById("brushSize").addEventListener("input", e => {
+  brushSize = e.target.value;
+});
 
-document.getElementById("undoBtn").onclick = undo;
-document.getElementById("redoBtn").onclick = redo;
-document.getElementById("clearBtn").onclick = () => {
+document.getElementById("colorPicker").addEventListener("input", e => {
+  color = e.target.value;
+});
+
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  if (e.touches) {
+    return {
+      x: e.touches[0].clientX - rect.left,
+      y: e.touches[0].clientY - rect.top
+    };
+  }
+  return {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
+  };
+}
+
+function startDraw(e) {
+  drawing = true;
+  const pos = getPos(e);
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+}
+
+function draw(e) {
+  if (!drawing) return;
+
+  const pos = getPos(e);
+  ctx.lineWidth = brushSize;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = currentTool === "eraser" ? "#ffffff" : color;
+
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+}
+
+function stopDraw() {
+  drawing = false;
+}
+
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mousemove", draw);
+canvas.addEventListener("mouseup", stopDraw);
+canvas.addEventListener("mouseleave", stopDraw);
+
+canvas.addEventListener("touchstart", startDraw);
+canvas.addEventListener("touchmove", draw);
+canvas.addEventListener("touchend", stopDraw);
+
+document.getElementById("clearBtn").addEventListener("click", () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#fffdbf";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  saveState();
-};
-document.getElementById("downloadBtn").onclick = () => {
+});
+
+document.getElementById("downloadBtn").addEventListener("click", () => {
   const link = document.createElement("a");
   link.download = "drawing.png";
   link.href = canvas.toDataURL();
   link.click();
-};
-
-function getPos(e) {
-  const rect = canvas.getBoundingClientRect();
-  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-  return { x: clientX - rect.left, y: clientY - rect.top };
-}
-
-canvas.addEventListener("mousedown", start);
-canvas.addEventListener("touchstart", start);
-
-function start(e) {
-  drawing = true;
-  const pos = getPos(e);
-  startX = pos.x;
-  startY = pos.y;
-
-  snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-  if (currentTool === "brush" || currentTool === "eraser") {
-    ctx.beginPath();
-    ctx.moveTo(startX, startY);
-  }
-
-  if (currentTool === "fill") {
-    ctx.fillStyle = brushColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    saveState();
-    drawing = false;
-  }
-
-  if (currentTool === "text") {
-    const text = prompt("Enter text:");
-    if (text) {
-      ctx.fillStyle = brushColor;
-      ctx.font = `${brushSize * 4}px Arial`;
-      ctx.fillText(text, startX, startY);
-      saveState();
-    }
-    drawing = false;
-  }
-}
-
-canvas.addEventListener("mousemove", draw);
-canvas.addEventListener("touchmove", draw);
-
-function draw(e) {
-  if (!drawing) return;
-  const pos = getPos(e);
-
-  ctx.lineWidth = brushSize;
-  ctx.strokeStyle = currentTool === "eraser" ? "#ffffff" : brushColor;
-  ctx.lineCap = "round";
-
-  if (currentTool === "brush" || currentTool === "eraser") {
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
-  } else {
-    ctx.putImageData(snapshot, 0, 0);
-    ctx.strokeStyle = brushColor;
-
-    if (currentTool === "line") {
-      ctx.beginPath();
-      ctx.moveTo(startX, startY);
-      ctx.lineTo(pos.x, pos.y);
-      ctx.stroke();
-    }
-
-    if (currentTool === "rect") {
-      ctx.strokeRect(startX, startY, pos.x - startX, pos.y - startY);
-    }
-
-    if (currentTool === "circle") {
-      const radius = Math.sqrt(
-        Math.pow(pos.x - startX, 2) + Math.pow(pos.y - startY, 2)
-      );
-      ctx.beginPath();
-      ctx.arc(startX, startY, radius, 0, Math.PI * 2);
-      ctx.stroke();
-    }
-  }
-}
-
-canvas.addEventListener("mouseup", end);
-canvas.addEventListener("touchend", end);
-
-function end() {
-  if (!drawing) return;
-  drawing = false;
-  saveState();
-}
+});
 </script>
-
 </body>
 </html>
