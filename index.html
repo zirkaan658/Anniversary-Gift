@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anniversary Gift</title>
+
+<!-- Google Fonts for romantic handwritten style -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+/* ===== Global Styles ===== */
+body {
+    margin: 0;
+    font-family: 'Pacifico', cursive;
+    background: linear-gradient(135deg,#f08383,#e9445d,#e44451,#FF8DAA);
+    color: #be1010;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+}
+
+/* ===== Section Styles ===== */
+section {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Entrance page */
+#entrance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Modal */
+.modal {
+    background: rgba(223, 126, 147, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px rgba(167, 7, 7, 0.692);
+    z-index: 2;
+    max-width: 90%;
+    transition: all 0.4s ease;
+}
+
+/* Buttons */
+button {
+    padding: 12px 24px;
+    margin: 10px;
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(135deg,#ff5a5a,#eb2831);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.25s ease;
+    position: relative;
+    font-family: 'Great Vibes', cursive;
+}
+button:hover {
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+/* Navigation Chart */
+#navigation h2 {
+    margin-bottom: 20px;
+    font-size: clamp(22px,5vw,28px);
+    font-family: 'Great Vibes', cursive;
+}
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.nav-btn {
+    flex: 1 1 45%;
+    min-width: 120px;
+    transition: all 0.3s ease;
+}
+.nav-btn:hover {
+    transform: scale(1.05);
+}
+
+.back-btn {
+    margin-top: 20px;
+    background: linear-gradient(135deg,#ff5a5a,#eb2831);
+    font-size: clamp(14px,4vw,16px);
+}
+
+/* Quiz Page */
+#quiz h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(22px,5vw,28px);
+    margin-bottom: 15px;
+       color: #ddd;
+}
+.question {
+    margin-bottom: 12px;
+    text-align: left;
+    padding: 10px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+     background-color: rgba(241, 121, 141, 0.733);
+     color: #ffffffd3;
+}
+.question p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.question label {
+    display: block;
+    margin-bottom: 3px;
+    font-size: clamp(14px,4vw,16px);
+}
+.question.wrong {
+    background-color: rgba(245, 14, 53, 0.801);
+}
+
+/* Find the Heart Page */
+#findHeart h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(22px,5vw,28px);
+    margin-bottom: 15px;
+    color: #ddd;
+}
+.heart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(50px,1fr));
+    gap: 8px;
+    max-width: 100%;
+    margin: 0 auto 15px auto;
+}
+.heart-box {
+    background: linear-gradient(135deg,#ffb6c1d3,#f86175be);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+    font-family: 'Great Vibes', cursive;
+    transition: transform 0.25s ease;
+}
+.heart-box:hover { transform: scale(1.1); }
+
+/* Pop-up styling */
+#quizPopup {
+    display:none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%) scale(0.85);
+    background: linear-gradient(135deg,#fc647b,#f5073a);
+    color:white;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(209, 49, 49, 0.856);
+    text-align:center;
+    font-size:16px;
+    max-width:90%;
+    z-index:1000;
+    opacity:0;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+#quizPopup.show {
+    display:block;
+    opacity:1;
+    transform: translate(-50%,-50%) scale(1);
+}
+
+/* ===== WHY I LOVE YOU ===== */
+#whyLoveYou h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(22px, 5vw, 28px);
+  margin-bottom: 10px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 5px #f5304e, 0 0 10px #fac5d0;
+}
+
+.reason-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  height: 65vh;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #FFB6C1, #ec5f82, #b84d4d);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.reason {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(14px,3.5vw,18px);
+  background: rgba(240, 3, 3, 0.212);
+  padding: 6px 10px;
+  border-radius: 10px;
+  color: #fff;
+  text-shadow: 0 0 2px #333;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: slideFade 0.5s forwards;
+}
+
+@keyframes slideFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== CARD FLIP GAME ===== */
+#cardflip h2 {
+  color: #ddd;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 8px;
+  max-width: 100%;
+  margin: 0 auto 15px auto;
+}
+
+.card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  perspective: 800px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  transition: transform 0.5s ease-in-out;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(18px,4vw,26px);
+}
+
+.card-front {
+  background: linear-gradient(135deg,#FFB6C1,#f53a3a);
+  color: white;
+}
+
+.card-back {
+  background: #fff;
+  transform: rotateY(180deg);
+}
+
+/* ===== Back Buttons ===== */
+.back-btn {
+  display: block;
+  margin: 12px auto;
+  padding: 8px 16px;
+  border-radius: 18px;
+  border: none;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(14px,3.5vw,16px);
+  background: linear-gradient(135deg,#eb667a,#f50626);
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Smooth transitions for all interactive elements */
+button, .modal, .card-inner, .heart-box {
+    transition: all 0.25s ease-in-out;
+}
+
+#tic-tac-toe h2 {
+  color: #ddd;
+}
+.tic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  gap: 8px;
+  justify-content: center;
+  margin: 20px auto;
+}
+.cell {
+  background: linear-gradient(135deg,#FFB6C1,#f51818);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.cell:hover {
+  transform: scale(1.1);
+}
+@media (max-width:500px){
+  .tic-grid { grid-template-columns: repeat(3, 60px); grid-template-rows: repeat(3, 60px); }
+  .cell { font-size: 2rem; }
+}
+
+
+/* ===== Photo Booth ===== */
+#ourphotobooth h2 {
+  color: #ddd;
+}
+
+.photo-wrapper {
+  overflow: hidden;
+  max-width: 90%;
+  margin: 0 auto 20px auto;
+  position: relative;
+}
+
+.photo-slide {
+  display: none;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.photo-slide img {
+  width: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+  min-height: 200px;
+  background: #f54e67;
+}
+
+.photo-controls {
+  display: flex;
+  justify-content: space-between;
+  max-width: 90%;
+  margin: 0 auto 15px auto;
+}
+
+.prev-btn, .next-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg,#df364f,#f33741);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.prev-btn:hover, .next-btn:hover {
+  transform: scale(1.1);
+}
+
+.engagement {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  font-family: 'Pacifico', cursive;
+  font-size: 18px;
+  color: #fff;
+}
+
+ 
+
+
+
+
+
+
+/* ===== RED / GREEN FLAG ===== */
+#redflaggreenflag h2 {
+  color: #ddd;
+}
+.flag-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.flag-question {
+  background: rgba(245, 120, 120, 0.719);
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  color: #ee0808;
+}
+
+.flag-question p {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.flag-question label {
+  display: block;
+  margin-bottom: 4px;
+  cursor: pointer;
+ 
+
+}
+
+.result-container {
+  text-align: center;
+  margin-top: 20px;
+ background: rgba(245, 120, 120, 0.719);
+}
+
+/* Controls */
+.controls {
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.category {
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 12px;
+  min-width: 220px;
+}
+
+.category h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.options button {
+  padding: 6px 10px;
+  border: none;
+  background: #f2f2f2;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 13px;
+}
+
+.options button.active {
+  background: #eb143c;
+  color: white;
+}
+
+.options button:hover {
+  transform: scale(1.05);
+}
+.paint-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.sidebar {
+  width: 220px;
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.sidebar h4 {
+  margin: 15px 0 8px;
+  font-size: 14px;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.tool {
+  padding: 8px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: white;
+}
+
+.tool.active {
+  background: #e41f43;
+  color: white;
+}
+
+.actions {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.canvas-wrapper {
+  flex: 1;
+  background: #ddd;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+canvas {
+  background: white;
+  width: 100%;
+  height: 600px;
+  display: block;
+  border-radius: 8px;
+  cursor: crosshair;
+}
+
+/* Mobile */
+@media(max-width: 900px) {
+  .paint-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+  }
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- Pop-up element -->
+<div id="quizPopup"></div>
+
+<!-- Page 1: Entrance -->
+<section id="entrance">
+    <div class="modal">
+        <h1 style="font-size:32px;">Do you want to enter here ?</h1>
+        <button id="yesBtn">YES</button>
+        <button id="noBtn">NO</button>
+    </div>
+</section>
+
+<!-- Page 2: Navigation Chart -->
+<section id="navigation">
+    <h2>Our Love Board</h2>
+    <div class="grid">
+        <button class="nav-btn" data-target="photoBooth">Our Photo Booth</button>
+        <button class="nav-btn" data-target="findHeart">Find the Heart</button>
+        <button class="nav-btn" data-target="redGreenFlag">Your Flag</button>
+        <button class="nav-btn" data-target="drawSomething">Draw Me Something</button>
+    
+        <button class="nav-btn" data-target="whyLoveYou">Why I Love You</button>
+        <button class="nav-btn" data-target="cardFlip">Card Flip</button>
+    
+        <button class="nav-btn" data-target="quiz">How Well You Know Me</button>
+        <button class="nav-btn" data-target="ticTacToe">Tic-Tac-Toe</button>
+    </div>
+    <button class="back-btn" id="navBack">Back</button>
+</section>
+
+
+
+
+
+
+<section id="quiz">
+  <h2>How Well You Know Me</h2>
+  <form id="quizForm">
+    <!-- 10 questions -->
+    <div class="question">
+      <p>1.What's my vibe? </p>
+      <label><input type="radio" name="q1" value="a"> Innocent</label>
+      <label><input type="radio" name="q1" value="b"> Mysterious</label>
+      <label><input type="radio" name="q1" value="c"> confident</label>
+      <label><input type="radio" name="q1" value="d"> Chaotic</label>
+    </div>
+    <div class="question">
+      <p>2. My aesthetic energy</p>
+      <label><input type="radio" name="q2" value="a"> simple & Plain</label>
+      <label><input type="radio" name="q2" value="b"> soft & cute </label>
+      <label><input type="radio" name="q2" value="c"> Savage & Intense</label>
+      <label><input type="radio" name="q2" value="d"> None</label>
+    </div>
+    <!-- Repeat similarly for q3-q10 -->
+    <div class="question">
+      <p>3. My weakness?</p>
+      <label><input type="radio" name="q3" value="a"> Trusting Easily</label>
+      <label><input type="radio" name="q3" value="b"> Being Lazy</label>
+      <label><input type="radio" name="q3" value="c"> Overthinking</label>
+      <label><input type="radio" name="q3" value="d"> Being too real</label>
+    </div>
+    <div class="question">
+      <p>4. my love Language ?</p>
+      <label><input type="radio" name="q4" value="a"> Words</label>
+      <label><input type="radio" name="q4" value="b"> Physical</label>
+      <label><input type="radio" name="q4" value="c"> Gifts</label>
+      <label><input type="radio" name="q4" value="d">  Time </label>
+    </div>
+    <div class="question">
+      <p>5. country i want to visit?</p>
+      <label><input type="radio" name="q5" value="a"> Japan</label>
+      <label><input type="radio" name="q5" value="b"> Italy</label>
+      <label><input type="radio" name="q5" value="c"> UAE</label>
+      <label><input type="radio" name="q5" value="d"> Korea</label>
+    </div>
+    <div class="question">
+      <p>6. Whats hurt me the most? </p>
+      <label><input type="radio" name="q6" value="a"> Being lied to</label>
+      <label><input type="radio" name="q6" value="b"> Being betrayed</label>
+      <label><input type="radio" name="q6" value="c"> Being ignored</label>
+      <label><input type="radio" name="q6" value="d"> Being left alone</label>
+    </div>
+    <div class="question">
+      <p>7. My Jealousy style is? </p>
+      <label><input type="radio" name="q7" value="a"> Verbal</label>
+      <label><input type="radio" name="q7" value="b"> Passive-aggressive</label>
+      <label><input type="radio" name="q7" value="c"> Silent treatment</label>
+      <label><input type="radio" name="q7" value="d"> Physical</label>
+    </div>
+    <div class="question">
+      <p>8. My favorite fast food?</p>
+      <label><input type="radio" name="q8" value="a"> Pizza</label>
+      <label><input type="radio" name="q8" value="b"> Burger</label>
+      <label><input type="radio" name="q8" value="c"> Shawarma</label>
+      <label><input type="radio" name="q8" value="d"> Tacos</label>
+    </div>
+    <div class="question">
+      <p>9. What i miss about you?</p>
+      <label><input type="radio" name="q9" value="a"> Your smile</label>
+      <label><input type="radio" name="q9" value="b"> Your voice</label>
+      <label><input type="radio" name="q9" value="c"> Your hugs</label>
+      <label><input type="radio" name="q9" value="d"> Your presence</label>
+    </div>
+    <div class="question">
+      <p>10. My romantic weakness?</p>
+      <label><input type="radio" name="q10" value="a"> Insecurity</label>
+      <label><input type="radio" name="q10" value="b"> Overthinking</label>
+      <label><input type="radio" name="q10" value="c"> loving too much</label>
+      <label><input type="radio" name="q10" value="d"> Fear of commitment</label>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  <button class="back-btn">Back</button>
+</section>
+
+
+<!-- Page: Find the Heart -->
+<section id="findHeart">
+  <h2>Find the Heart</h2>
+  <div class="heart-grid"></div>
+  <button class="back-btn">Back</button>
+</section>
+<!-- ===== PAGE 4: WHY I LOVE YOU ===== -->
+<section id="whyLoveYou">
+  <h2>Why I Love You</h2>
+  <div class="reason-container">
+    <!-- 100 reasons will be inserted here by JS -->
+  </div>
+  <button class="back-btn">Back</button>
+</section>
+
+<!-- ===== PAGE 6: CARD FLIP GAME ===== -->
+<section id="cardFlip">
+  <h2>Card Flip Game</h2>
+  <div class="card-grid"></div>
+  <button class="back-btn">Back</button>
+</section>
+
+<section id="ticTacToe">
+  <h2>Tic-Tac-Toe 🐥 (Hammad) vs 🦢 (Zaib)</h2>
+  <div class="tic-grid">
+    <div class="cell" data-index="0"></div>
+    <div class="cell" data-index="1"></div>
+    <div class="cell" data-index="2"></div>
+    <div class="cell" data-index="3"></div>
+    <div class="cell" data-index="4"></div>
+    <div class="cell" data-index="5"></div>
+    <div class="cell" data-index="6"></div>
+    <div class="cell" data-index="7"></div>
+    <div class="cell" data-index="8"></div>
+  </div>
+  <button class="back-btn">Back</button>
+</section>
+<!-- Photo Booth Section -->
+<section id="photoBooth">
+  <h2>Our Photo Booth</h2>
+  <div class="photo-wrapper">
+    <div class="photo-slide"><img src="Photo1.jpeg" alt="Photo 1"></div>
+    <div class="photo-slide"><img src="Photo2.jpeg" alt="Photo 2"></div>
+    <div class="photo-slide"><img src="Photo3.jpeg" alt="Photo 3"></div>
+    <div class="photo-slide"><img src="Photo4.jpeg" alt="Photo 4"></div>
+    <div class="photo-slide"><img src="Photo5.jpeg" alt="Photo 5"></div>
+   
+  </div>
+  <div class="photo-controls">
+    <button class="prev-btn">◀ Previous</button>
+    <button class="next-btn">Next ▶</button>
+  </div>
+  <div class="engagement">
+    <div class="likes">❤️ <span class="likeCount">0</span></div>
+    <div class="comments">💬 <span class="commentCount">0</span></div>
+    <div class="shares">🔁 <span class="shareCount">0</span></div>
+  </div>
+  <button class="back-btn">Back</button>
+</section>  
+
+
+
+  
+
+
+<section id="redGreenFlag">
+  <h2>Red Flag 🚩 or Green Flag 💚?</h2>
+
+  <form id="flagForm" class="flag-form">
+
+    <!-- Questions inserted by JS -->
+
+  </form>
+
+  <div class="result-container" style="display:none;">
+    <canvas id="flagChart" width="250" height="250"></canvas>
+    <h3 id="flagResultText"></h3>
+  </div>
+
+  <button class="back-btn">Back</button>
+</section>
+
+
+<section id="drawSomething" class="paint-section">
+  <h2>Draw Me Something 🎨</h2>
+
+  <div class="paint-container">
+
+    <!-- LEFT TOOL PANEL -->
+    <div class="sidebar">
+
+      <h4>Tools</h4>
+      <div class="tool-grid">
+        <button class="tool active" data-tool="brush">🖌</button>
+        <button class="tool" data-tool="eraser">🧽</button>
+        <button class="tool" data-tool="fill">🪣</button>
+        <button class="tool" data-tool="text">🔤</button>
+      </div>
+
+      <h4>Shapes</h4>
+      <div class="tool-grid">
+        <button class="tool" data-tool="line">📏</button>
+        <button class="tool" data-tool="rect">▭</button>
+        <button class="tool" data-tool="circle">⚪</button>
+      </div>
+
+      <h4>Brush Size</h4>
+      <input type="range" id="brushSize" min="1" max="40" value="5">
+
+      <h4>Colors</h4>
+      <input type="color" id="colorPicker" value="#ff4d6d">
+
+      <div class="actions">
+        <button id="undoBtn">Undo</button>
+        <button id="redoBtn">Redo</button>
+        <button id="clearBtn">Clear</button>
+        <button id="downloadBtn">Download</button>
+      </div>
+
+    </div>
+
+    <!-- CANVAS AREA -->
+    <div class="canvas-wrapper">
+      <canvas id="paintCanvas"></canvas>
+    </div>
+
+  </div>
+    <button class="back-btn">Back</button>
+</section>
+
+<script>
+// ===== Elements =====
+const entrance=document.getElementById('entrance');
+const navigation=document.getElementById('navigation');
+const yesBtn=document.getElementById('yesBtn');
+const noBtn=document.getElementById('noBtn');
+const navButtons=document.querySelectorAll('.nav-btn');
+const backButtons=document.querySelectorAll('.back-btn');
+const navBack=document.getElementById('navBack');
+const quizForm=document.getElementById('quizForm');
+const quizPopup=document.getElementById('quizPopup');
+const heartGrid=document.querySelector('#findHeart .heart-grid');
+
+// ===== Entrance Logic =====
+yesBtn.addEventListener('click',()=>{entrance.style.display='none';navigation.style.display='block';});
+noBtn.addEventListener('mouseenter',moveNoBtn);
+noBtn.addEventListener('touchstart',moveNoBtn);
+function moveNoBtn(){
+    const x=Math.random()*(window.innerWidth-noBtn.offsetWidth);
+    const y=Math.random()*(window.innerHeight-noBtn.offsetHeight);
+    noBtn.style.position='absolute';
+    noBtn.style.left=x+'px';
+    noBtn.style.top=y+'px';
+}
+
+// ===== Navigation Buttons =====
+navButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        const targetId=btn.getAttribute('data-target');
+        navigation.style.display='none';
+        const targetSection=document.getElementById(targetId);
+        if(targetSection) targetSection.style.display='block';
+    });
+});
+
+// ===== Back Buttons =====
+backButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        btn.parentElement.style.display='none';
+        navigation.style.display='block';
+    });
+});
+navBack.addEventListener('click',()=>{
+    navigation.style.display='none';
+    entrance.style.display='flex';
+});
+
+// ===== Quiz Logic =====
+const correctAnswers={q1:'d',q2:'c',q3:'c',q4:'a',q5:'d',q6:'b',q7:'c',q8:'c',q9:'d',q10:'c'};
+function showPopup(message,duration=5000){
+    quizPopup.innerHTML=message;
+    quizPopup.classList.add('show');
+    setTimeout(()=>{quizPopup.classList.remove('show');},duration);
+}
+quizForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    let score=0;
+    const formData=new FormData(quizForm);
+    document.querySelectorAll('.question').forEach(q=>q.classList.remove('wrong'));
+    for(let i=1;i<=10;i++){
+        const name='q'+i;
+        const questionDiv=quizForm.querySelector(`[name="${name}"]`).closest('.question');
+        if(formData.get(name)===correctAnswers[name]) score++;
+        else questionDiv.classList.add('wrong');
+    }
+    let message='';
+    if(score<=3) message="You need training!💔";
+    else if(score<=7) message="You know me a little💢";
+    else if(score<=9) message="Good 💎";
+    else message="You are my soulmate!💋 ";
+    showPopup(`<h2>Your score: ${score}/10</h2><p>${message}</p>`,5000);
+});
+
+// ===== Find the Heart Logic =====
+let boxes=[];
+for(let i=0;i<20;i++){
+    const div=document.createElement('div');
+    div.classList.add('heart-box');
+    div.dataset.index=i;
+    div.textContent="💌";
+    heartGrid.appendChild(div);
+    boxes.push(div);
+}
+let heartIndex=Math.floor(Math.random()*20);
+boxes.forEach((box,i)=>{
+    box.addEventListener('click',()=>{
+        if(i===heartIndex){
+            box.textContent='❤️';
+            showPopup("You found the heart! 💖<br>That's why ypu have got my heart my sweet heart💕..my pookie love you so much ..happy anniversery my love 🌹🌹🌹🌹🌹🌹    wishing us the best moment of our lives",5000);
+        }
+    });
+});
+
+// ===== Show entrance initially =====
+entrance.style.display='flex';
+// ===== WHY I LOVE YOU =====
+document.addEventListener("DOMContentLoaded", function () {
+
+  const reasonContainer = document.querySelector('#whyLoveYou .reason-container');
+  if (!reasonContainer) return;
+
+  const loveReasons = [
+    "I love your smile every day. ❤",
+    "You make me laugh like no one else. 🧡",
+    "Your hugs are my favorite place. 💛",
+    "I admire your kindness. 💚",
+    "You make me feel safe. 💙",
+    "I love the way you listen. 💜",
+    "You inspire me to be better. 🤎",
+    "Your creativity amazes me. 🖤",
+    "You are my best friend. 💖",
+    "I love your courage. 💗",
+    "You understand me without words. 💓",
+    "Your voice feels like home. 💞",
+    "You care in ways no one else does. 💕",
+    "Your heart is pure and beautiful. ❣",
+    "I trust you completely. 🤍",
+    "You make ordinary days magical. 💘",
+    "Your presence is my favorite gift. 💝",
+    "You love me at my worst. 💟",
+    "Every message from you makes my day. 💌",
+    "You are my whole universe. 🪐",
+    "You make my world brighter. 🌍",
+    "Life feels colorful with you. 🌈",
+    "You are sweeter than candy. 🍬",
+    "You are my favorite treat. 🍫",
+    "Your smile blooms like a flower. 🌸",
+    "You bring freshness into my life. 💐",
+    "You make every season beautiful. 🍁",
+    "Your laughter is soft and lovely. 🌷",
+    "You brighten my darkest days. 🌼",
+    "You make my heart blossom. 🌺",
+    "Your love feels timeless. 🌹",
+    "You make my heart float. 🎈",
+    "You make life feel like a celebration. 🎀",
+    "You are my precious blessing. 🎗",
+    "Your kisses are unforgettable. 💋",
+    "You are rare and valuable to me. 💎",
+    "My heart is locked with yours. 🔐",
+    "You make my fears disappear. 👻",
+    "You are soft and gentle. 🐰",
+    "You make life feel magical. 🦄",
+    "You stay close to my heart. 🐇",
+    "Your soul is peaceful. 🕊",
+    "You are graceful in everything you do. 🦢",
+    "You bring innocence and joy. 🐣",
+    "I love the way you look at me. 👀",
+    "You make me believe in forever. ❤",
+    "You respect my feelings. 🧡",
+    "You stand by me always. 💛",
+    "You make hard days easier. 💚",
+    "You never give up on us. 💙",
+    "You make my heart feel full. 💜",
+    "You are patient with me. 🤎",
+    "You accept me as I am. 🖤",
+    "You celebrate my small wins. 💖",
+    "You calm my overthinking. 💗",
+    "You make silence comfortable. 💓",
+    "You protect my heart gently. 💞",
+    "You remember the little things. 💕",
+    "You love deeply and honestly. ❣",
+    "You make me feel chosen. 🤍",
+    "You support my dreams. 💘",
+    "You believe in me even when I doubt myself. 💝",
+    "You make love feel effortless. 💟",
+    "You are my safe space. 💌",
+    "You make distance feel small. 🪐",
+    "You understand my moods. 🌍",
+    "You make my life more colorful. 🌈",
+    "You are sweet in unexpected ways. 🍬",
+    "You comfort me without trying. 🍫",
+    "You glow differently. 🌸",
+    "You bring peace to my chaos. 💐",
+    "You grow with me. 🍁",
+    "You are gentle with my heart. 🌷",
+    "You light up every room. 🌼",
+    "You make love feel exciting. 🌺",
+    "You are my forever choice. 🌹",
+    "You lift me higher. 🎈",
+    "You make memories beautiful. 🎀",
+    "You are my lucky charm. 🎗",
+    "You leave sweet marks on my heart. 💋",
+    "You shine in your own way. 💎",
+    "You keep my secrets safe. 🔐",
+    "You make life less scary. 👻",
+    "You are warm and comforting. 🐰",
+    "You make dreams feel possible. 🦄",
+    "You stay loyal and true. 🐇",
+    "You carry calm energy. 🕊",
+    "You move with elegance. 🦢",
+    "You keep love pure. 🐣",
+    "You see the real me. 👀",
+    "You love me without conditions. 💖",
+    "You make my heart choose you every day. 💗",
+    "You are my favorite person in every lifetime. 💓",
+    "You feel like destiny. 💞",
+    "You are my once in a lifetime love. 💕",
+    "I love you simply because you are you. ❣"
+  ];
+
+  // Clear container first
+  reasonContainer.innerHTML = "";
+
+  // Insert reasons with stagger animation
+  loveReasons.forEach((text, i) => {
+    const div = document.createElement("div");
+    div.className = "reason";
+    div.textContent = text;
+    div.style.animationDelay = `${i * 0.05}s`;
+    reasonContainer.appendChild(div);
+  });
+
+});
+
+
+// ===== CARD FLIP GAME =====
+const cardGrid = document.querySelector('#cardFlip .card-grid');
+const emojis = ['❄','🌈','🎀','🍓','🪐','🦢','💋','🌼','🍭','🍧'];
+const specialPair = ['Z','H'];
+let cardsArray = [...emojis,...emojis,...specialPair];
+cardsArray = cardsArray.sort(()=>0.5-Math.random());
+
+let firstCard=null, secondCard=null;
+let lock=false;
+
+cardsArray.forEach(symbol=>{
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.innerHTML = `<div class="card-inner">
+                      <div class="card-front"></div>
+                      <div class="card-back">${symbol}</div>
+                    </div>`;
+  cardGrid.appendChild(card);
+
+  card.addEventListener('click',()=>{
+    if(lock || card===firstCard) return;
+    card.classList.add('flip');
+    if(!firstCard) { firstCard=card; return; }
+    secondCard=card;
+    lock=true;
+
+    const firstSymbol = firstCard.querySelector('.card-back').innerText;
+    const secondSymbol = secondCard.querySelector('.card-back').innerText;
+setTimeout(() => {
+    if(firstSymbol === secondSymbol || (firstSymbol==='X' && secondSymbol==='Y') || (firstSymbol==='Y' && secondSymbol==='X')) {
+        // Special pair logic (X & Y) handled here
+        if((firstSymbol==='X' && secondSymbol==='Y') || (firstSymbol==='Y' && secondSymbol==='X')) {
+            showPopup("💖 Yayyy !🌷 You've found the perfect pair!💌 We are made for each other! 💖", 5000);
+        }
+        // If normal matching pair, keep them flipped (do nothing)
+    } else {
+        firstCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
+    }
+    firstCard = null;
+    secondCard = null;
+    lock = false;
+}, 700);
+
+  });
+});
+// Tic-Tac-Toe
+const ticSection = document.getElementById('ticTacToe');
+const cells = ticSection.querySelectorAll('.cell');
+
+let board = Array(9).fill(null);
+const player = '🐥';
+const ai = '🦢';
+
+const winningCombos = [
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6]
+];
+
+function checkWinner(b, symbol){
+  return winningCombos.some(combo => combo.every(i => b[i] === symbol));
+}
+
+function emptyIndices(b){
+  return b.map((v,i)=>v===null ? i : null).filter(i=>i!==null);
+}
+
+// AI logic: block or win
+function aiMove(){
+  let b = board.slice();
+
+  // 1️⃣ Check if AI can win
+  for(let i of emptyIndices(b)){
+    b[i] = ai;
+    if(checkWinner(b, ai)) return i;
+    b[i] = null;
+  }
+
+  // 2️⃣ Check if AI needs to block player
+  for(let i of emptyIndices(b)){
+    b[i] = player;
+    if(checkWinner(b, player)) return i;
+    b[i] = null;
+  }
+
+  // 3️⃣ Take center if empty
+  if(b[4]===null) return 4;
+
+  // 4️⃣ Take random corner
+  const corners = [0,2,6,8].filter(i=>b[i]===null);
+  if(corners.length) return corners[Math.floor(Math.random()*corners.length)];
+
+  // 5️⃣ Take any empty
+  const empties = emptyIndices(b);
+  return empties[Math.floor(Math.random()*empties.length)];
+}
+
+function showPopupTTT(message,duration=4000){
+  quizPopup.innerHTML=message;
+  quizPopup.classList.add('show');
+  setTimeout(()=>quizPopup.classList.remove('show'), duration);
+}
+
+function resetGame(){
+  board.fill(null);
+  cells.forEach(c=>c.textContent='');
+}
+
+cells.forEach(cell=>{
+  cell.addEventListener('click',()=>{
+    const idx = parseInt(cell.dataset.index);
+    if(board[idx]!==null) return;
+
+    // Player move
+    board[idx]=player;
+    cell.textContent = player;
+
+    if(checkWinner(board, player)){
+      showPopupTTT("🐥 You win!");
+      setTimeout(resetGame,1500);
+      return;
+    }
+
+    if(board.every(v=>v!==null)){
+      showPopupTTT("It's a tie!");
+      setTimeout(resetGame,1500);
+      return;
+    }
+
+    // AI move
+    const aiIdx = aiMove();
+    board[aiIdx]=ai;
+    cells[aiIdx].textContent = ai;
+
+    if(checkWinner(board, ai)){
+      showPopupTTT("🦢 Hale wins!");
+      setTimeout(resetGame,1500);
+      return;
+    }
+
+    if(board.every(v=>v!==null)){
+      showPopupTTT("It's a tie!");
+      setTimeout(resetGame,1500);
+      return;
+    }
+  });
+});
+// ===== Photo Booth Logic =====
+const photoSlides = document.querySelectorAll('#photoBooth .photo-slide');
+const nextBtn = document.querySelector('#photoBooth .next-btn');
+const prevBtn = document.querySelector('#photoBooth .prev-btn');
+const likeCount = document.querySelector('#photoBooth .likeCount');
+const commentCount = document.querySelector('#photoBooth .commentCount');
+const shareCount = document.querySelector('#photoBooth .shareCount');
+
+let currentSlide = 0;
+const totalSlides = photoSlides.length;
+
+function showPhoto(index){
+    photoSlides.forEach((slide,i)=>{
+        slide.style.display = (i === index) ? 'block' : 'none';
+    });
+}
+showPhoto(currentSlide);
+
+if(nextBtn && prevBtn) {
+    nextBtn.addEventListener('click', ()=>{
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showPhoto(currentSlide);
+    });
+
+    prevBtn.addEventListener('click', ()=>{
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showPhoto(currentSlide);
+    });
+}
+
+// Engagement clicks
+document.querySelector('#photoBooth .likes')?.addEventListener('click', ()=> {
+    likeCount.innerText = parseInt(likeCount.innerText) + 1;
+});
+
+document.querySelector('#photoBooth .comments')?.addEventListener('click', ()=> {
+    commentCount.innerText = parseInt(commentCount.innerText) + 1;
+});
+
+document.querySelector('#photoBooth .shares')?.addEventListener('click', ()=> {
+    shareCount.innerText = parseInt(shareCount.innerText) + 1;
+});
+
+
+             
+
+
+
+
+
+
+// ===== RED FLAG / GREEN FLAG CHECKER =====
+document.addEventListener("DOMContentLoaded", () => {
+
+  const flagForm = document.getElementById("flagForm");
+  if(!flagForm) return;
+
+  const resultContainer = document.querySelector("#redGreenFlag .result-container");
+  const resultText = document.getElementById("flagResultText");
+  const chartCanvas = document.getElementById("flagChart");
+  const ctx = chartCanvas.getContext("2d");
+
+  const questions = [
+    ["Stalks ex on social media", "Has moved on completely"],
+    ["Keeps ex photos ", "Deletes old memories respectfully"],
+    ["Deletes chats to hide things", "Keeps nothing to hide"],
+    ["Gets irritated easily", "Communicates calmly"],
+    ["Flirts for fun", "Respects boundaries"],
+    ["Ignores messages for ego", "Responds with maturity"],
+    ["Avoids serious talks", "Handles deep conversations"],
+    ["Breaks promises often", "Keeps promises"],
+    ["Blames others always", "Takes responsibility"],
+    ["Chooses ego over love", "Chooses love over ego"]
+  ];
+
+  const answerType = [
+    ["red", "green"],
+    ["red", "green"],
+    ["red", "green"],
+    ["red", "green"],
+    ["red", "green"],
+    ["red", "green"],
+    ["red", "green"],
+    ["red", "green"],
+    ["red", "green"],
+    ["red", "green"]
+  ];
+
+  // Generate questions
+  questions.forEach((q, i) => {
+    const div = document.createElement("div");
+    div.classList.add("flag-question");
+
+    div.innerHTML = `
+      <p>${i+1}. Choose one:</p>
+      <label>
+        <input type="radio" name="q${i}" value="${answerType[i][0]}" required>
+        ${q[0]}
+      </label>
+      <label>
+        <input type="radio" name="q${i}" value="${answerType[i][1]}" required>
+        ${q[1]}
+      </label>
+    `;
+
+    flagForm.appendChild(div);
+  });
+
+  const submitBtn = document.createElement("button");
+  submitBtn.type = "submit";
+  submitBtn.textContent = "Check Result";
+  flagForm.appendChild(submitBtn);
+
+  flagForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(flagForm);
+    let green = 0;
+    let red = 0;
+
+    for(let value of formData.values()){
+      if(value === "green") green++;
+      else red++;
+    }
+
+    const greenPercent = Math.round((green/10)*100);
+    const redPercent = 100 - greenPercent;
+
+    resultContainer.style.display = "block";
+
+    drawChart(greenPercent, redPercent);
+
+    if(greenPercent >= 70){
+      resultText.textContent = "💚 You're mostly a Green Flag!";
+    } else if(greenPercent >= 40){
+      resultText.textContent = "💛 Mixed signals... work on yourself!";
+    } else {
+      resultText.textContent = "🚩 Major Red Flag detected!";
+    }
+
+  });
+
+  function drawChart(greenPercent, redPercent) {
+    ctx.clearRect(0,0,250,250);
+
+    const centerX = 125;
+    const centerY = 125;
+    const radius = 100;
+
+    const greenAngle = (greenPercent / 100) * 2 * Math.PI;
+
+    // Green section
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius, 0, greenAngle);
+    ctx.fillStyle = "green";
+    ctx.fill();
+
+    // Red section
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius, greenAngle, 2 * Math.PI);
+    ctx.fillStyle = "red";
+    ctx.fill();
+
+    // Inner circle (donut effect)
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 50, 0, 2 * Math.PI);
+    ctx.fillStyle = "#fff";
+    ctx.fill();
+
+    // Text
+    ctx.fillStyle = "black";
+    ctx.font = "16px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(`${greenPercent}% 💚`, centerX, centerY - 10);
+    ctx.fillText(`${redPercent}% 🚩`, centerX, centerY + 15);
+  }
+
+});
+
+
+
+const controlsContainer = document.getElementById("controls");
+
+function createControls() {
+  Object.keys(outfitData).forEach(category => {
+
+    const categoryDiv = document.createElement("div");
+    categoryDiv.classList.add("category");
+
+    const title = document.createElement("h3");
+    title.textContent = category.toUpperCase();
+    categoryDiv.appendChild(title);
+
+    const optionsDiv = document.createElement("div");
+    optionsDiv.classList.add("options");
+
+    outfitData[category].forEach((imgSrc, index) => {
+      const button = document.createElement("button");
+      button.textContent = `Option ${index + 1}`;
+
+      button.addEventListener("click", () => {
+        selectItem(category, imgSrc, button);
+      });
+
+      optionsDiv.appendChild(button);
+    });
+
+    categoryDiv.appendChild(optionsDiv);
+    controlsContainer.appendChild(categoryDiv);
+  });
+}
+
+function selectItem(category, imgSrc, button) {
+  const layer = document.getElementById(`layer-${category}`);
+  layer.src = imgSrc;
+
+  // Remove active from siblings
+  const buttons = button.parentElement.querySelectorAll("button");
+  buttons.forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+}
+
+createControls();
+const canvas = document.getElementById("paintCanvas");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = 600;
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+let currentTool = "brush";
+let drawing = false;
+let startX, startY;
+let brushSize = 5;
+let brushColor = "#ff4d6d";
+let snapshot;
+
+let undoStack = [];
+let redoStack = [];
+
+function saveState() {
+  undoStack.push(canvas.toDataURL());
+  redoStack = [];
+}
+
+function undo() {
+  if (!undoStack.length) return;
+  redoStack.push(canvas.toDataURL());
+  const img = new Image();
+  img.src = undoStack.pop();
+  img.onload = () => ctx.drawImage(img, 0, 0);
+}
+
+function redo() {
+  if (!redoStack.length) return;
+  undoStack.push(canvas.toDataURL());
+  const img = new Image();
+  img.src = redoStack.pop();
+  img.onload = () => ctx.drawImage(img, 0, 0);
+}
+
+document.querySelectorAll(".tool").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll(".tool").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentTool = btn.dataset.tool;
+  };
+});
+
+document.getElementById("brushSize").oninput = e => brushSize = e.target.value;
+document.getElementById("colorPicker").oninput = e => brushColor = e.target.value;
+
+document.getElementById("undoBtn").onclick = undo;
+document.getElementById("redoBtn").onclick = redo;
+document.getElementById("clearBtn").onclick = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#fffdbf";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  saveState();
+};
+document.getElementById("downloadBtn").onclick = () => {
+  const link = document.createElement("a");
+  link.download = "drawing.png";
+  link.href = canvas.toDataURL();
+  link.click();
+};
+
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  return { x: clientX - rect.left, y: clientY - rect.top };
+}
+
+canvas.addEventListener("mousedown", start);
+canvas.addEventListener("touchstart", start);
+
+function start(e) {
+  drawing = true;
+  const pos = getPos(e);
+  startX = pos.x;
+  startY = pos.y;
+
+  snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  if (currentTool === "brush" || currentTool === "eraser") {
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+  }
+
+  if (currentTool === "fill") {
+    ctx.fillStyle = brushColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    saveState();
+    drawing = false;
+  }
+
+  if (currentTool === "text") {
+    const text = prompt("Enter text:");
+    if (text) {
+      ctx.fillStyle = brushColor;
+      ctx.font = `${brushSize * 4}px Arial`;
+      ctx.fillText(text, startX, startY);
+      saveState();
+    }
+    drawing = false;
+  }
+}
+
+canvas.addEventListener("mousemove", draw);
+canvas.addEventListener("touchmove", draw);
+
+function draw(e) {
+  if (!drawing) return;
+  const pos = getPos(e);
+
+  ctx.lineWidth = brushSize;
+  ctx.strokeStyle = currentTool === "eraser" ? "#ffffff" : brushColor;
+  ctx.lineCap = "round";
+
+  if (currentTool === "brush" || currentTool === "eraser") {
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+  } else {
+    ctx.putImageData(snapshot, 0, 0);
+    ctx.strokeStyle = brushColor;
+
+    if (currentTool === "line") {
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+
+    if (currentTool === "rect") {
+      ctx.strokeRect(startX, startY, pos.x - startX, pos.y - startY);
+    }
+
+    if (currentTool === "circle") {
+      const radius = Math.sqrt(
+        Math.pow(pos.x - startX, 2) + Math.pow(pos.y - startY, 2)
+      );
+      ctx.beginPath();
+      ctx.arc(startX, startY, radius, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+}
+
+canvas.addEventListener("mouseup", end);
+canvas.addEventListener("touchend", end);
+
+function end() {
+  if (!drawing) return;
+  drawing = false;
+  saveState();
+}
+</script>
+
+</body>
+</html>
