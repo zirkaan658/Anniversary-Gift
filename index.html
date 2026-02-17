@@ -429,7 +429,10 @@ button, .modal, .card-inner, .heart-box {
 * {
   box-sizing: border-box;
 }
-
+/* Ensure paint app is hidden by default */
+#drawSomething {
+    display: none;
+}
 body {
   margin: 0;
   font-family: sans-serif;
@@ -748,8 +751,11 @@ canvas {
   </div>
 
   <button class="back-btn">Back</button>
-</section>
-<section class="paint-app">
+</section>  
+
+
+
+<section id="drawSomething" class="paint-app">
   <h2 class="title">Draw Me Something 🎨</h2>
 
   <div class="app-wrapper">
@@ -760,8 +766,6 @@ canvas {
       <div class="tools">
         <button class="tool active" data-tool="brush">🖌</button>
         <button class="tool" data-tool="eraser">🧽</button>
-       
-        
       </div>
 
       <input type="range" id="brushSize" min="1" max="40" value="5">
@@ -780,6 +784,7 @@ canvas {
     </div>
 
   </div>
+  <button class="back-btn">Back</button>
 </section>
 
 
@@ -1417,5 +1422,7 @@ document.getElementById("downloadBtn").addEventListener("click", () => {
   link.click();
 });
 </script>
+
+
 </body>
 </html>
